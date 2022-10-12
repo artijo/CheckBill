@@ -11,5 +11,15 @@
         <input type="text" name="name" placeholder="ป้อนชื่อคนที่มาในวันนี้" required>
         <input type="submit" name="submit" id="" value="ส่งข้อมูล">
     </form>
+
+    <p>{{name}}</p>
+    {% if session.people %}
+    <form action="{{url_for('addfood')}}" method="post">
+        <input type="text" name="name" placeholder="ป้อนชื่ออาหารหรือเครื่องดื่ม" required>
+        <input type="number" name="price" placeholder="ป้อนราคา" required>
+        <input type="submit" name="submit" id="" value="ส่งข้อมูล">
+    </form>
+    {%endif%}
+
 </body>
 </html>
