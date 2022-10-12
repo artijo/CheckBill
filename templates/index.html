@@ -16,7 +16,11 @@
     {% if session.people %}
     <form action="{{url_for('addfood')}}" method="post">
         <input type="text" name="name" placeholder="ป้อนชื่ออาหารหรือเครื่องดื่ม" required>
-        <input type="number" name="price" placeholder="ป้อนราคา" required>
+        <input type="number" name="price" placeholder="ป้อนราคา" required><br>
+        {% for i in session.people %}
+        <input type="checkbox" name="people" value="{{i}}">
+        <label for="people">{{i}}</label><br>
+        {% endfor %}
         <input type="submit" name="submit" id="" value="ส่งข้อมูล">
     </form>
     {%endif%}

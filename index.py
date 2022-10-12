@@ -6,11 +6,10 @@ app.config['SECRET_KEY'] = 'mykey'
 
 people = list()
 foods = dict()
-session['people'] = False
 
 @app.route('/')
 def index():
-    
+    session['people'] = False
     return render_template('index.html')
 
 @app.route('/addpeople',methods=['GET', 'POST'])
@@ -19,7 +18,7 @@ def addpeople():
         name = request.form['name']
         people.append(name)
 
-        print(people)
+        # print(people)
         session['people'] = people
         
     return render_template('index.html',name=name)
@@ -29,9 +28,11 @@ def addfood():
     if request.method == 'POST':
         name = request.form['name']
         price = request.form['price']
-        foods.update({name:{"price":price}})
+        people = request.form.getlist('people')
+        foods.update({name:{"people":people,"price":price}})
 
     print(foods)
+    # print(people)
         
     return render_template('index.html')
 
