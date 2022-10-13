@@ -7,6 +7,7 @@ app.config['SECRET_KEY'] = 'mykey'
 people = list()
 menu = list()
 foods = dict()
+result = dict()
 
 @app.route('/')
 def index():
@@ -37,10 +38,25 @@ def addfood():
     for i in foods :
         for x in menu :
             if i == x :
-                countitem = len(foods[i]['people'])
+                countitem = len(foods[i]['people']) #จำนวนคนในการเลือกอาหารนั้น
+                hhh = int(foods[x]['price']) / countitem # ราคาหารจำนวนอาหาร
+    for y in people:
+        if y in foods[i]['people']:
+            try:
+                dt = result[y]
+                print('...',dt)
+                dt = dt+hhh
+                result.update({y:dt})
+            except KeyError:
+                result.update({y:hhh})
 
-    print(menu)
-    print(countitem)
+
+    # print(menu)
+    # print(countitem)
+    print(hhh)
+
+    for i in result:
+        print(i,'\t\t\t',result[i])
     # print(people)
         
     return render_template('index.html')
