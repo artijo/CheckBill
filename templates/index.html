@@ -4,26 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CheckBill</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/mobile.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/desktop.css" media="(min-width: 992px)" />
 </head>
 <body>
-    <form action="{{url_for('addpeople')}}" method="post">
-        <input type="text" name="name" placeholder="ป้อนชื่อคนที่มาในวันนี้" required>
-        <input type="submit" name="submit" id="" value="ส่งข้อมูล">
-    </form>
-
-    <p>{{name}}</p>
-    {% if session.people %}
-    <form action="{{url_for('addfood')}}" method="post">
-        <input type="text" name="name" placeholder="ป้อนชื่ออาหารหรือเครื่องดื่ม" required>
-        <input type="number" name="price" placeholder="ป้อนราคา" required><br>
-        {% for i in session.people %}
-        <input type="checkbox" name="people" value="{{i}}">
-        <label for="people">{{i}}</label><br>
-        {% endfor %}
-        <input type="submit" name="submit" id="" value="ส่งข้อมูล">
-    </form>
-    {%endif%}
-
+    <div class="s-container">
+        <div class="area">
+            <div class="title"><h1>CheckBill</h1></div>
+            <div class="addname">
+                <form action="{{url_for('addpeople')}}" method="post">
+                    <input type="text" name="name" placeholder="ป้อนชื่อคนที่มาในวันนี้" required>
+                    <input type="submit" name="submit" id="" value="ส่งข้อมูล">
+                </form>
+            </div>
+    
+            {% if session.people %}
+            <div class="addfood">
+                <form action="{{url_for('addfood')}}" style="text-align: center;" method="post">
+                    <input type="text" name="name" placeholder="ป้อนชื่ออาหารหรือเครื่องดื่ม" required>
+                    <input type="number" name="price" placeholder="ป้อนราคา" required><br><br>
+                    <label for="checkbox">ใครกินมั่ง?</label><br>
+                    {% for i in session.people %}
+                    <input type="checkbox" name="people" value="{{i}}">
+                    <label for="people">{{i}}</label><br>
+                    {% endfor %}
+                    <input type="submit" name="submit" id="" value="ส่งข้อมูล">
+                </form>
+            </div>
+            {%endif%}
+            {% if session['result'] %}
+            <div class="show">
+                <div class="a"><h3>ชื่อ</h3></div>
+                <div class="b"><h3>ต้องจ่าย (บาท)</h3></div>
+                {% for i in session.result %}
+                <div class="a">{{i}}</div>
+                <div class="b">{{session['result'][i]}}</div>
+                {% endfor %}
+            </div>
+            <a href="{{url_for('clare')}}">ล้างข้อมูลทั้งหมด</a>
+            {% endif %}
+        </div>
+        <div class="credit">
+            <p>CheckBill V0.5 Beta By <a href="https://artijo.com" target="_blank">ARTIJO</a> 2022.</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="../static/script.js"></script>
 </body>
 </html>

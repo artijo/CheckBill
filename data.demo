@@ -10,3 +10,7 @@ people = {
         'price': [100]
     }
 }
+
+result = {
+    'name': 'price'
+}
