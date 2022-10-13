@@ -5,6 +5,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mykey'
 
 people = list()
+menu = list()
 foods = dict()
 
 @app.route('/')
@@ -29,9 +30,17 @@ def addfood():
         name = request.form['name']
         price = request.form['price']
         people = request.form.getlist('people')
+        menu.append(name)
         foods.update({name:{"people":people,"price":price}})
 
-    print(foods)
+    # session['menu'] = menu
+    for i in foods :
+        for x in menu :
+            if i == x :
+                countitem = len(foods[i]['people'])
+
+    print(menu)
+    print(countitem)
     # print(people)
         
     return render_template('index.html')
