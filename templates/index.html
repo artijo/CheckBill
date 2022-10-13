@@ -41,6 +41,13 @@
                 <div class="a">{{i}}</div>
                 <div class="b">{{session['result'][i]}}</div>
                 {% endfor %}
+                <form action="{{url_for('qrcode')}}" method="post">
+                    <input type="number" name="number" placeholder="ป้อนหมายเลขพร้อมเพย์" required>
+                    <input type="submit" name="submit" value="ส่งข้อมูล">
+                </form>
+                {% if session.qrimg %}
+                <img src="{{session['qrimg']}}" alt="">
+                {% endif %}
             </div>
             <a href="{{url_for('clare')}}">ล้างข้อมูลทั้งหมด</a>
             {% endif %}

@@ -1,4 +1,5 @@
 from flask import Flask,render_template,request,session,redirect
+from promptpay import qrcode
 
 
 app = Flask(__name__)
@@ -45,7 +46,6 @@ def addfood():
         if y in session['foods'][i]['people']:
             try:
                 dt = session['result'][y]
-                print('...',dt)
                 dt = dt+hhh
                 session['result'].update({y:dt})
             except KeyError:
@@ -56,9 +56,19 @@ def addfood():
     # print(countitem)
     # print(hhh)
 
-    for i in session['result']:
-        print(i,'\t\t\t',session['result'][i])
+    # for i in session['result']:
+    #     print(i,'\t\t\t',session['result'][i])
     # print(people)
+    return render_template('index.html')
+
+@app.route('/qr',methods=['GET', 'POST'])
+def qrcode():
+    if request.method == 'POST':
+        id_or_phone_number = request.form['number']
+
+    payload = qrcode.generate_payload(id_or_phone_number)
+    session['qrimg'] = qrcode.to_image(payload)
+
     return render_template('index.html')
 
 @app.route('/clare')

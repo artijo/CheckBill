@@ -1,1 +1,2 @@
 flask==2.2.2
+promptpay==1.1.9
