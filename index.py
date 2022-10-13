@@ -51,7 +51,6 @@ def addfood():
             except KeyError:
                 session['result'].update({y:hhh})
 
-
     # print(menu)
     # print(countitem)
     # print(hhh)
@@ -61,15 +60,15 @@ def addfood():
     # print(people)
     return render_template('index.html')
 
-@app.route('/qr',methods=['GET', 'POST'])
-def qrcode():
-    if request.method == 'POST':
-        id_or_phone_number = request.form['number']
+# @app.route('/qr',methods=['GET', 'POST'])
+# def qrcode():
+#     if request.method == 'POST':
+#         id_or_phone_number = request.form['number']
 
-    payload = qrcode.generate_payload(id_or_phone_number)
-    session['qrimg'] = qrcode.to_image(payload)
+#     payload = qrcode.generate_payload(id_or_phone_number)
+#     session['qrimg'] = qrcode.to_image(payload)
 
-    return render_template('index.html')
+#     return render_template('index.html')
 
 @app.route('/clare')
 def clare():
