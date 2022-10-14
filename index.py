@@ -1,5 +1,4 @@
 from flask import Flask,render_template,request,session,redirect
-from promptpay import qrcode
 
 
 app = Flask(__name__)
